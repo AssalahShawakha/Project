@@ -4,4 +4,11 @@
     <string name="password">Enter Your Password</string>
     <string name="login">Login</string>
     <string name="forgot_password">Forgot Password?</string>
+    <string name="welcome_text">Welcome Text</string>
+    <string name="TaskNumber">You have ...... this month</string>
+    <string name="search_a_task">Search a task</string>
+    <string name="to_do">To Do</string>
+    <string name="progress">Progress</string>
+    <string name="done">Done</string>
+    <string name="today_s_tasks">Today\'s Tasks</string>
 </resources>

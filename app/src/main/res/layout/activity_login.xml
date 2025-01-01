@@ -39,11 +39,11 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/login"
-            android:textSize="30sp"
-            android:layout_marginTop="20dp"
             android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="@string/login"
             android:textColor="#7478fc"
+            android:textSize="30sp"
             android:textStyle="bold" />
 
         <EditText
@@ -53,8 +53,8 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:background="@drawable/textfield_border"
-            android:drawablePadding="8dp"
             android:drawableStart="@drawable/email_icons"
+            android:drawablePadding="8dp"
             android:hint="@string/email_address"
             android:inputType="textEmailAddress" />
 
@@ -63,10 +63,10 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:drawableStart="@drawable/password_icon"
             android:layout_marginTop="20dp"
-            android:drawablePadding="8dp"
             android:background="@drawable/textfield_border"
+            android:drawableStart="@drawable/password_icon"
+            android:drawablePadding="8dp"
             android:hint="@string/password"
             android:inputType="textPassword" />
 
