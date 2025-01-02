@@ -11,4 +11,11 @@
     <string name="progress">Progress</string>
     <string name="done">Done</string>
     <string name="today_s_tasks">Today\'s Tasks</string>
+    <string name="full_name_label">Full Name:</string>
+    <string name="email">Email:</string>
+    <string name="position">Position:</string>
+    <string name="projects_number">Projects I worked on:</string>
+    <string name="passwordProfile">Password:</string>
+    <string name="mobile">Mobile:</string>
+    <string name="edit_profile">Edit Profile</string>
 </resources>
