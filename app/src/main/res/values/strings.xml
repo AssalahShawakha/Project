@@ -18,4 +18,25 @@
     <string name="passwordProfile">Password:</string>
     <string name="mobile">Mobile:</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="add_manager">Add Manager</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="Email">Email</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="descriptionprofile_image">Profile Image</string>
+    <string name="descriptionback_button">Back Button</string>
+    <string name="no_image_selected">No image selected</string>
+    <string name="Password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="submit">Submit</string>
+    <string name="employees">Employees</string>
+    <string name="descriptionadmin_logo">Admin Logo</string>
+    <string name="admin_dashboard">Admin Dashboard</string>
+    <string name="_0">0</string>
+    <string name="admin_logo">Admin Logo</string>
+    <string name="projects">Projects</string>
+    <string name="reports">Reports</string>
+    <string name="add_employee">Add Employee</string>
+    <string name="add_project">Add Project</string>
+    <string name="view_reports">View Reports</string>
 </resources>

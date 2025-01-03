@@ -43,7 +43,6 @@ public class addManager extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_manager);
 
-        // ربط المكونات
         firstName = findViewById(R.id.first_name);
         lastName = findViewById(R.id.last_name);
         email = findViewById(R.id.email);
@@ -55,7 +54,6 @@ public class addManager extends AppCompatActivity {
         submitButton = findViewById(R.id.submit_button);
         backButton = findViewById(R.id.back_button);
 
-        // عند الضغط على زر العودة للخلف
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +61,6 @@ public class addManager extends AppCompatActivity {
             }
         });
 
-        // عند الضغط على الصورة لرفعها
         profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +68,6 @@ public class addManager extends AppCompatActivity {
             }
         });
 
-        // عند الضغط على زر الإرسال
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,16 +114,13 @@ public class addManager extends AppCompatActivity {
             return;
         }
 
-        // رابط الـ API
         String url = "http://192.168.1.106/mobile/add_manager.php";
 
-        // تحويل الصورة إلى Base64
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         selectedImageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
         byte[] imageBytes = byteArrayOutputStream.toByteArray();
         String encodedImage = android.util.Base64.encodeToString(imageBytes, android.util.Base64.DEFAULT);
 
-        // إرسال الطلب باستخدام Volley
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override

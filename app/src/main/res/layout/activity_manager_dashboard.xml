@@ -112,7 +112,7 @@
                 android:id="@+id/img"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                tools:srcCompat="@drawable/Done_icon" />
+                tools:srcCompat="@drawable/done_icon" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -130,13 +130,16 @@
         android:layout_height="wrap_content"
         android:text="@string/today_s_tasks"
         android:textSize="25sp"
+        android:layout_marginStart="20dp"
         android:textColor="@color/purple"
         android:textStyle="bold"
         android:layout_marginTop="20dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RecycleView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
