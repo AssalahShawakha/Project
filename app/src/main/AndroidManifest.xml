@@ -21,6 +21,12 @@
             android:name=".managerDashboard"
             android:exported="false" />
         <activity
+            android:name=".addManager"
+            android:exported="false" />
+        <activity
+            android:name=".SettingActivity"
+            android:exported="false" />
+        <activity
             android:name=".adminDashboard"
             android:exported="false" />
         <activity
