@@ -72,11 +72,11 @@
                 android:id="@+id/img1"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                tools:srcCompat="@drawable/todo_icon" />
+                app:srcCompat="@drawable/todo_icon" />
 
             <TextView
                 android:id="@+id/textView2"
-                android:layout_width="wrap_content"
+                android:layout_width="35dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/to_do" />
@@ -92,7 +92,7 @@
                 android:id="@+id/img2"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                tools:srcCompat="@drawable/progress_icon" />
+                app:srcCompat="@drawable/progress_icon" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -112,7 +112,7 @@
                 android:id="@+id/img"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                tools:srcCompat="@drawable/done_icon" />
+                app:srcCompat="@drawable/done_icon" />
 
             <TextView
                 android:id="@+id/textView4"

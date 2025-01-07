@@ -114,29 +114,6 @@
             </LinearLayout>
 
             <!-- Dark Mode Option -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="16dp">
-
-                <TextView
-                    android:id="@+id/dark_mode_option"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dark_mode"
-                    android:textStyle="bold"
-                    android:textColor="@color/purple"
-                    android:textSize="20sp" />
-
-                <Switch
-                    android:id="@+id/dark_mode_switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:thumbTint="@color/purple"
-                    android:trackTint="@color/purple"/>
-            </LinearLayout>
 
             <!-- Account Management Option -->
             <LinearLayout

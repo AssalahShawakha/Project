@@ -32,7 +32,7 @@ public class addManager extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
 
-    private EditText firstName, lastName, email, phoneNumber, password, confirmPassword;
+    private EditText firstName, lastName, email, phone, password, confirmPassword;
     private ImageView profileImage, backButton;
     private TextView imageName;
     private Button submitButton;
@@ -43,10 +43,11 @@ public class addManager extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_manager);
 
+        // ربط المكونات
         firstName = findViewById(R.id.first_name);
         lastName = findViewById(R.id.last_name);
         email = findViewById(R.id.email);
-        phoneNumber = findViewById(R.id.phone_number);
+        phone = findViewById(R.id.phone_number);
         password = findViewById(R.id.password);
         confirmPassword = findViewById(R.id.confirm_password);
         profileImage = findViewById(R.id.profile_image);
@@ -54,6 +55,7 @@ public class addManager extends AppCompatActivity {
         submitButton = findViewById(R.id.submit_button);
         backButton = findViewById(R.id.back_button);
 
+        // عند الضغط على زر العودة للخلف
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,6 +63,7 @@ public class addManager extends AppCompatActivity {
             }
         });
 
+        // عند الضغط على الصورة لرفعها
         profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,6 +71,7 @@ public class addManager extends AppCompatActivity {
             }
         });
 
+        // عند الضغط على زر الإرسال
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,7 +104,7 @@ public class addManager extends AppCompatActivity {
         String firstNameText = firstName.getText().toString().trim();
         String lastNameText = lastName.getText().toString().trim();
         String emailText = email.getText().toString().trim();
-        String phoneNumberText = phoneNumber.getText().toString().trim();
+        String phoneNumberText = phone.getText().toString().trim();
         String passwordText = password.getText().toString().trim();
         String confirmPasswordText = confirmPassword.getText().toString().trim();
 
@@ -109,18 +113,26 @@ public class addManager extends AppCompatActivity {
             return;
         }
 
-        if (selectedImageBitmap == null) {
-            Toast.makeText(this, "Please select an image", Toast.LENGTH_SHORT).show();
+        if (firstNameText.isEmpty() || lastNameText.isEmpty() || emailText.isEmpty() || phoneNumberText.isEmpty() || passwordText.isEmpty()) {
+            Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        // رابط الـ API
         String url = "http://192.168.1.106/mobile/add_manager.php";
 
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        selectedImageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-        byte[] imageBytes = byteArrayOutputStream.toByteArray();
-        String encodedImage = android.util.Base64.encodeToString(imageBytes, android.util.Base64.DEFAULT);
+        // تحويل الصورة إلى Base64 فقط إذا كانت موجودة
+        final String encodedImage;
+        if (selectedImageBitmap != null) {
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            selectedImageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+            byte[] imageBytes = byteArrayOutputStream.toByteArray();
+            encodedImage = android.util.Base64.encodeToString(imageBytes, android.util.Base64.DEFAULT);
+        } else {
+            encodedImage = "";  // في حال عدم اختيار صورة
+        }
 
+        // إرسال الطلب باستخدام Volley
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
@@ -140,15 +152,15 @@ public class addManager extends AppCompatActivity {
                 params.put("first_name", firstNameText);
                 params.put("last_name", lastNameText);
                 params.put("email", emailText);
-                params.put("phone_number", phoneNumberText);
+                params.put("phone", phoneNumberText);
                 params.put("password", passwordText);
-                params.put("profile_image", encodedImage); // إرسال الصورة كـ Base64
+                params.put("profile_image", encodedImage); // إرسال الصورة كـ Base64 (إذا كانت موجودة)
                 return params;
             }
         };
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
-
     }
+
 }
