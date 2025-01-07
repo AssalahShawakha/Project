@@ -88,36 +88,12 @@ public class EmployeeProfileActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                try {
-                                    firstName.setText(rs.getString("first_name"));
-                                } catch (SQLException e) {
-                                    throw new RuntimeException(e);
-                                }
-                                try {
-                                    lastName.setText(rs.getString("last_name"));
-                                } catch (SQLException e) {
-                                    throw new RuntimeException(e);
-                                }
-                                try {
-                                    email.setText(rs.getString("email"));
-                                } catch (SQLException e) {
-                                    throw new RuntimeException(e);
-                                }
-                                try {
-                                    phoneNumber.setText(rs.getString("phone_number"));
-                                } catch (SQLException e) {
-                                    throw new RuntimeException(e);
-                                }
-                                try {
-                                    salary.setText(String.valueOf(rs.getDouble("salary")));
-                                } catch (SQLException e) {
-                                    throw new RuntimeException(e);
-                                }
-                                try {
-                                    position.setText(rs.getString("position"));
-                                } catch (SQLException e) {
-                                    throw new RuntimeException(e);
-                                }
+                                firstName.setText(rs.getString("first_name"));
+                                lastName.setText(rs.getString("last_name"));
+                                email.setText(rs.getString("email"));
+                                phoneNumber.setText(rs.getString("phone_number"));
+                                salary.setText(String.valueOf(rs.getDouble("salary")));
+                                position.setText(rs.getString("position"));
                             }
                         });
                     }

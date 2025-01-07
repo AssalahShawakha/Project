@@ -24,7 +24,7 @@ public class EditEmployeeProfileActivity extends AppCompatActivity {
         phoneNumber = findViewById(R.id.phone_number);
         salary = findViewById(R.id.salary);
         position = findViewById(R.id.position);
-        //saveButton = findViewById(R.id.save_button); // Ensure this matches the ID from XML
+        saveButton = findViewById(R.id.save_button);  // Initialize save button
 
         // Get the employee data passed from the profile activity
         Intent intent = getIntent();
@@ -39,6 +39,17 @@ public class EditEmployeeProfileActivity extends AppCompatActivity {
         saveButton.setOnClickListener(v -> {
             // Save the updated employee profile
             // Example: saveEmployeeProfile(firstName.getText().toString(), ...);
+
+            // You can create a method to save these changes to your database or pass the updated data back to the previous activity.
+            Intent resultIntent = new Intent();
+            resultIntent.putExtra("FIRST_NAME", firstName.getText().toString());
+            resultIntent.putExtra("LAST_NAME", lastName.getText().toString());
+            resultIntent.putExtra("EMAIL", email.getText().toString());
+            resultIntent.putExtra("PHONE", phoneNumber.getText().toString());
+            resultIntent.putExtra("SALARY", salary.getText().toString());
+            resultIntent.putExtra("POSITION", position.getText().toString());
+
+            setResult(RESULT_OK, resultIntent);
             finish();  // Close the edit activity
         });
     }

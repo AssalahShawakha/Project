@@ -80,6 +80,11 @@ public class adminDashboard extends AppCompatActivity {
             Intent settingsIntent = new Intent(adminDashboard.this, SettingActivity.class);
             startActivity(settingsIntent);
         });
+        adminLogoImageView.setOnClickListener(v -> {
+            Intent settingsIntent = new Intent(adminDashboard.this, profile.class);
+            startActivity(settingsIntent);
+        });
+
     }
 
     private void fetchDashboardData() {
