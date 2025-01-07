@@ -1,24 +1,20 @@
 package com.example.finalproject;
 
-
-import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-public class EmployeeActivity extends AppCompatActivity {
+public class EmployeeDashboard extends AppCompatActivity {
 
     private TextView tvCompletedTasks, tvProgressRate, tvRemainingTime;
     private ListView lvTasks, lvNotifications;
@@ -28,52 +24,51 @@ public class EmployeeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee_dashboard);
 
-        // Bind XML elements to Java objects
         tvCompletedTasks = findViewById(R.id.tvCompletedTasks);
         tvProgressRate = findViewById(R.id.tvProgressRate);
         tvRemainingTime = findViewById(R.id.tvRemainingTime);
         lvTasks = findViewById(R.id.lvTasks);
         lvNotifications = findViewById(R.id.lvNotifications);
 
-        // Load data from the database
-        loadAssignedTasks();
+        loadTasks();
         loadNotifications();
-        loadPersonalStats();
     }
 
-    private void loadAssignedTasks() {
-        // Retrieve data from the database
-        ArrayList<HashMap<String, String>> tasks = new ArrayList<>();
+    private void loadTasks() {
+        String url = "http://192.168.1.106/mobile/tasks.php?action=getTasks&employee_id=1";
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // Parse JSON and update UI
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Handle error
+            }
+        });
 
-        HashMap<String, String> task1 = new HashMap<>();
-        task1.put("name", "Prepare the monthly report");
-        task1.put("deadline", "2024-12-31");
-        task1.put("status", "Pending");
-        tasks.add(task1);
-
-        // Set up the task list using an adapter
-        // TaskAdapter adapter = new TaskAdapter(this, tasks);
-        //   lvTasks.setAdapter(adapter);
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(jsonArrayRequest);
     }
 
     private void loadNotifications() {
-        // Retrieve notifications from the database
-        ArrayList<String> notifications = new ArrayList<>();
-        notifications.add("A new task has been assigned.");
-        notifications.add("Reminder: The financial report deadline is tomorrow.");
+        String url = "http://192.168.1.106/mobile/tasks.php?action=getNotifications&employee_id=1";
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // Parse JSON and update UI
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Handle error
+            }
+        });
 
-        // NotificationAdapter adapter = new NotificationAdapter(this, notifications);
-        // lvNotifications.setAdapter(adapter);
-    }
-
-    private void loadPersonalStats() {
-        // Retrieve statistics from the database
-        int completedTasks = 10;
-        int progressRate = 80;
-        int remainingDays = 5;
-
-        tvCompletedTasks.setText("Completed Tasks: " + completedTasks);
-        tvProgressRate.setText("Progress Rate: " + progressRate + "%");
-        tvRemainingTime.setText("Remaining Time for Open Tasks: " + remainingDays + " days");
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(jsonArrayRequest);
     }
 }
