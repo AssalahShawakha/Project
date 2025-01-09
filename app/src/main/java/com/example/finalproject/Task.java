@@ -6,6 +6,7 @@ public class Task {
     private String time;
     private int progress;
 
+    // Constructor to initialize Task
     public Task(String title, String description, String time, int progress) {
         this.title = title;
         this.description = description;
@@ -13,6 +14,7 @@ public class Task {
         this.progress = progress;
     }
 
+    // Getter methods for each attribute
     public String getTitle() {
         return title;
     }

@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -18,9 +17,18 @@
         tools:targetApi="31">
 
         <activity
+            android:name=".EditEmployeeProfileActivity"
+            android:exported="false" />
+<<<<<<< HEAD
+
+=======
+        <activity
+            android:name=".EmployeeProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddEmployeeActivity"
             android:exported="false" />
-
+>>>>>>> 1b45437501c4457fd1039b45ee6a90b0611c80b7
         <activity
             android:name=".EmployeeDashboard"
             android:exported="false" />
@@ -29,9 +37,6 @@
             android:exported="false" />
         <activity
             android:name=".managerDashboard"
-            android:exported="false" />
-        <activity
-            android:name=".LanguageSettingsActivity"
             android:exported="false" />
         <activity
             android:name=".addManager"

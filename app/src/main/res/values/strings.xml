@@ -1,16 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ITAxis</string>
     <string name="email_address">Enter Your Email Address</string>
     <string name="password">Enter Your Password</string>
     <string name="login">Login</string>
     <string name="forgot_password">Forgot Password?</string>
-    <string name="welcome_text">Welcome Text</string>
+    <string name="welcome_text">Welcome </string>
+    <string name="welcome_emp">Welcome.. </string>
     <string name="TaskNumber">You have ...... this month</string>
     <string name="search_a_task">Search a task</string>
     <string name="to_do">To Do</string>
     <string name="progress">Progress</string>
     <string name="done">Done</string>
-    <string name="today_s_tasks">Today\'s Tasks</string>
+    <string name="today_s_tasks">Today's Tasks</string>
     <string name="full_name_label">Full Name:</string>
     <string name="email">Email:</string>
     <string name="position">Position:</string>
@@ -44,7 +46,19 @@
     <string name="enable_notifications">Enable Notifications</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="manage_profile">Manage Profile</string>
+<<<<<<< HEAD
     <string name="gender">gender\n</string>
     <string name="male">male\n</string>
     <string name="female">female\n</string>
 </resources>
+=======
+    <string name="salary">Salary</string>
+    <string name="description_profile_image">Profile Image</string>
+    <string name="save">Save</string>
+
+    <!-- New Strings -->
+    <string name="completed_tasks">Completed Tasks</string>
+    <string name="progress_rate">Progress Rate</string>
+    <string name="remaining_time">Remaining Time</string>
+</resources>
+>>>>>>> 1b45437501c4457fd1039b45ee6a90b0611c80b7
