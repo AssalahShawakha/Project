@@ -49,4 +49,8 @@
     <string name="description_profile_image">Profile Image</string>
     <string name="save">Save</string>
 
+    <!-- New Strings -->
+    <string name="completed_tasks">Completed Tasks</string>
+    <string name="progress_rate">Progress Rate</string>
+    <string name="remaining_time">Remaining Time</string>
 </resources>

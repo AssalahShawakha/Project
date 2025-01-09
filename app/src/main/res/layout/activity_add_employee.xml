@@ -39,6 +39,7 @@
             android:textColor="#7478fc"
             android:textSize="30sp"
             android:textStyle="bold" />
+
         <TextView
             android:id="@+id/add_employee2_title"
             android:layout_width="wrap_content"
