@@ -19,43 +19,48 @@
         <activity
             android:name=".EditEmployeeProfileActivity"
             android:exported="false" />
-<<<<<<< HEAD
 
-=======
         <activity
             android:name=".EmployeeProfileActivity"
             android:exported="false" />
+
         <activity
             android:name=".AddEmployeeActivity"
             android:exported="false" />
->>>>>>> 1b45437501c4457fd1039b45ee6a90b0611c80b7
+
         <activity
             android:name=".EmployeeDashboard"
             android:exported="false" />
+
         <activity
             android:name=".ProjectsActivity"
             android:exported="false" />
+
         <activity
             android:name=".managerDashboard"
             android:exported="false" />
+
         <activity
             android:name=".addManager"
             android:exported="false" />
+
         <activity
             android:name=".SettingActivity"
             android:exported="false" />
+
         <activity
             android:name=".adminDashboard"
             android:exported="false" />
+
         <activity
             android:name=".Login"
             android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
