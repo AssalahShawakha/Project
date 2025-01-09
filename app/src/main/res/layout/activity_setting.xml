@@ -10,6 +10,7 @@
     android:background="@color/purple"
     tools:context=".SettingActivity">
 
+    <!-- Header Section -->
     <LinearLayout
         android:id="@+id/header_section"
         android:layout_width="0dp"
@@ -21,6 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <!-- Back Button -->
         <ImageView
             android:id="@+id/back_button"
             android:layout_width="40dp"
@@ -28,6 +30,7 @@
             android:contentDescription="@string/descriptionback_button"
             android:src="@drawable/wback_icon" />
 
+        <!-- Title -->
         <TextView
             android:id="@+id/settings_title"
             android:layout_width="wrap_content"
@@ -39,6 +42,7 @@
             android:textStyle="bold" />
     </LinearLayout>
 
+    <!-- Settings Options -->
     <ScrollView
         android:id="@+id/settings_scroll"
         android:layout_width="0dp"
@@ -56,6 +60,7 @@
             android:orientation="vertical">
 
 
+            <!-- Change Language Option -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -83,6 +88,7 @@
 
             </LinearLayout>
 
+            <!-- Enable Notifications Option -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -107,6 +113,7 @@
                     android:trackTint="@color/purple"/>
             </LinearLayout>
 
+            <!-- Dark Mode Option -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -131,6 +138,7 @@
                     android:trackTint="@color/purple"/>
             </LinearLayout>
 
+            <!-- Account Management Option -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

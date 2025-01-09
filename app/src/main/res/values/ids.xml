@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="tvRemainingTime" type="id" />
+    <item name="lvTasks" type="id" />
+    <item name="tvCompletedTasks" type="id" />
+</resources>

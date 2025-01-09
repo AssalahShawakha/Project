@@ -1,0 +1,188 @@
+package com.example.finalproject;
+
+import android.os.Bundle;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class EmployeeProfileActivity extends AppCompatActivity {
+
+    private EditText firstName, lastName, email, phoneNumber, salary, position;
+    private TextView profileImageText;
+    private ImageView profileImage;
+    private Button editButton;
+    private int employeeId = 1;  // Example employee ID, should be dynamically set
+
+    // Database connection details
+    private static final String DB_URL = "jdbc:mysql://your-database-url:3306/your-db-name";
+    private static final String DB_USER = "";
+    private static final String DB_PASSWORD = "";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_employee_profile);
+
+        // Initialize UI components
+        firstName = findViewById(R.id.first_name);
+        lastName = findViewById(R.id.last_name);
+        email = findViewById(R.id.email);
+        phoneNumber = findViewById(R.id.phone_number);
+        salary = findViewById(R.id.salary);
+        position = findViewById(R.id.position);
+        profileImageText = findViewById(R.id.profile_image_text);
+        profileImage = findViewById(R.id.profile_image);
+        editButton = findViewById(R.id.edit_button);
+
+        // Fetch employee data from the database
+        fetchEmployeeData(employeeId);
+
+        // Set up the Edit button click listener
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Allow editing employee details
+                // Handle the update functionality here
+                updateEmployeeData(employeeId);
+            }
+        });
+    }
+
+    private void fetchEmployeeData(int employeeId) {
+        // Database connection in a separate thread (because it's a network operation)
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+
+                    // Query to get employee details
+                    String query = "SELECT first_name, last_name, email, phone_number, salary, position " +
+                            "FROM employees WHERE employee_id = ?";
+                    PreparedStatement stmt = conn.prepareStatement(query);
+                    stmt.setInt(1, employeeId);
+                    ResultSet rs = stmt.executeQuery();
+
+                    if (rs.next()) {
+                        // Set values to the UI components
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    firstName.setText(rs.getString("first_name"));
+                                } catch (SQLException e) {
+                                    throw new RuntimeException(e);
+                                }
+                                try {
+                                    lastName.setText(rs.getString("last_name"));
+                                } catch (SQLException e) {
+                                    throw new RuntimeException(e);
+                                }
+                                try {
+                                    email.setText(rs.getString("email"));
+                                } catch (SQLException e) {
+                                    throw new RuntimeException(e);
+                                }
+                                try {
+                                    phoneNumber.setText(rs.getString("phone_number"));
+                                } catch (SQLException e) {
+                                    throw new RuntimeException(e);
+                                }
+                                try {
+                                    salary.setText(String.valueOf(rs.getDouble("salary")));
+                                } catch (SQLException e) {
+                                    throw new RuntimeException(e);
+                                }
+                                try {
+                                    position.setText(rs.getString("position"));
+                                } catch (SQLException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+                        });
+                    }
+
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    private void updateEmployeeData(int employeeId) {
+        // Get updated values from the EditText fields
+        String updatedFirstName = firstName.getText().toString();
+        String updatedLastName = lastName.getText().toString();
+        String updatedEmail = email.getText().toString();
+        String updatedPhoneNumber = phoneNumber.getText().toString();
+        String updatedSalary = salary.getText().toString();
+        String updatedPosition = position.getText().toString();
+
+        // Database connection for update operation
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+
+                    // SQL update query
+                    String updateQuery = "UPDATE employees SET first_name = ?, last_name = ?, email = ?, " +
+                            "phone_number = ?, salary = ?, position = ? WHERE employee_id = ?";
+                    PreparedStatement stmt = conn.prepareStatement(updateQuery);
+
+                    // Set the parameters for the query
+                    stmt.setString(1, updatedFirstName);
+                    stmt.setString(2, updatedLastName);
+                    stmt.setString(3, updatedEmail);
+                    stmt.setString(4, updatedPhoneNumber);
+                    stmt.setDouble(5, Double.parseDouble(updatedSalary));
+                    stmt.setString(6, updatedPosition);
+                    stmt.setInt(7, employeeId);
+
+                    // Execute the update
+                    int rowsAffected = stmt.executeUpdate();
+
+                    if (rowsAffected > 0) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(EmployeeProfileActivity.this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(EmployeeProfileActivity.this, "Error updating profile", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        }).start();
+    }
+}

@@ -44,4 +44,7 @@
     <string name="enable_notifications">Enable Notifications</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="manage_profile">Manage Profile</string>
+    <string name="salary">Salary</string>
+
+    <string name="description_profile_image">Profile Image</string>
 </resources>

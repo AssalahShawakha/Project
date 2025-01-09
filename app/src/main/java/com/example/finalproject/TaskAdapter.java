@@ -1,4 +1,5 @@
 package com.example.finalproject;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,7 @@ import java.util.List;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
 
-    private final List<Task> taskList;
+    private List<Task> taskList;
 
     public TaskAdapter(List<Task> taskList) {
         this.taskList = taskList;
