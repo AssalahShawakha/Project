@@ -16,7 +16,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".EmployeeDashboardActivity"
+            android:name=".EditEmployeeProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EmployeeProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddEmployeeActivity"
             android:exported="false" />
         <activity
             android:name=".EmployeeDashboard"

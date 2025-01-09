@@ -1,32 +1,42 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@android:color/white"
-    tools:context=".EmployeeDashboardActivity">
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <!-- Assigned Tasks Section -->
     <TextView
-        android:id="@+id/assigned_tasks_title"
+        android:id="@+id/tvCompletedTasks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Assigned Tasks"
+        android:text="Completed Tasks: 0"
         android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:padding="8dp" />
 
-    <!-- RecyclerView for tasks list -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_tasks"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/assigned_tasks_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+    <TextView
+        android:id="@+id/tvProgressRate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Progress Rate: 0%"
+        android:textSize="18sp"
+        android:padding="8dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tvRemainingTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remaining Time: 0 days"
+        android:textSize="18sp"
+        android:padding="8dp" />
+
+    <ListView
+        android:id="@+id/lvTasks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp" />
+
+    <ListView
+        android:id="@+id/lvNotifications"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp" />
+</LinearLayout>
