@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +38,7 @@ public class addManager extends AppCompatActivity {
     private ImageView profileImage, backButton;
     private TextView imageName;
     private Button submitButton;
+    private RadioGroup genderGroup;
     private Bitmap selectedImageBitmap;
 
     @Override
@@ -54,30 +57,16 @@ public class addManager extends AppCompatActivity {
         imageName = findViewById(R.id.image_name);
         submitButton = findViewById(R.id.submit_button);
         backButton = findViewById(R.id.back_button);
+        genderGroup = findViewById(R.id.gender_group);
 
         // عند الضغط على زر العودة للخلف
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        backButton.setOnClickListener(v -> onBackPressed());
 
         // عند الضغط على الصورة لرفعها
-        profileImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openImageChooser();
-            }
-        });
+        profileImage.setOnClickListener(v -> openImageChooser());
 
         // عند الضغط على زر الإرسال
-        submitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                submitManagerData();
-            }
-        });
+        submitButton.setOnClickListener(v -> submitManagerData());
     }
 
     private void openImageChooser() {
@@ -108,6 +97,11 @@ public class addManager extends AppCompatActivity {
         String passwordText = password.getText().toString().trim();
         String confirmPasswordText = confirmPassword.getText().toString().trim();
 
+        // الحصول على قيمة الجنس
+        int selectedGenderId = genderGroup.getCheckedRadioButtonId();
+        RadioButton selectedGender = findViewById(selectedGenderId);
+        String genderText = selectedGender.getText().toString();
+
         if (!passwordText.equals(confirmPasswordText)) {
             Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
             return;
@@ -134,18 +128,8 @@ public class addManager extends AppCompatActivity {
 
         // إرسال الطلب باستخدام Volley
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(addManager.this, "Response: " + response, Toast.LENGTH_SHORT).show();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(addManager.this, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }) {
+                response -> Toast.makeText(addManager.this, "Response: " + response, Toast.LENGTH_SHORT).show(),
+                error -> Toast.makeText(addManager.this, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show()) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
@@ -154,6 +138,7 @@ public class addManager extends AppCompatActivity {
                 params.put("email", emailText);
                 params.put("phone", phoneNumberText);
                 params.put("password", passwordText);
+                params.put("gender", genderText); // إرسال الجنس
                 params.put("profile_image", encodedImage); // إرسال الصورة كـ Base64 (إذا كانت موجودة)
                 return params;
             }
@@ -162,5 +147,4 @@ public class addManager extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
-
 }

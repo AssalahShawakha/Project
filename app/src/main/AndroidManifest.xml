@@ -16,14 +16,16 @@
         android:theme="@style/Theme.FinalProject"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
         <activity
             android:name=".AddEmployeeActivity"
             android:exported="false" />
-        <activity
-            android:name=".profile"
-            android:exported="false" />
+
         <activity
             android:name=".EmployeeDashboard"
+            android:exported="false" />
+        <activity
+            android:name=".ProjectsActivity"
             android:exported="false" />
         <activity
             android:name=".managerDashboard"

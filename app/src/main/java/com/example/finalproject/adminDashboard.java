@@ -23,7 +23,7 @@ import org.json.JSONObject;
 public class adminDashboard extends AppCompatActivity {
 
     private TextView adminNameTextView, employeesCountTextView, projectsCountTextView, reportsCountTextView;
-    private ImageView adminLogoImageView,settings;
+    private ImageView adminLogoImageView,settings,projects;
     private Button addManagerButton, addEmployeeButton, addProjectButton, viewReportsButton;
 
     @Override
@@ -43,6 +43,7 @@ public class adminDashboard extends AppCompatActivity {
         addProjectButton = findViewById(R.id.add_project_button);
         viewReportsButton = findViewById(R.id.view_reports_button);
         settings = findViewById(R.id.setting);
+        projects = findViewById(R.id.projects);
 
         // استلام البيانات من LoginActivity
         Intent intent = getIntent();
@@ -61,10 +62,14 @@ public class adminDashboard extends AppCompatActivity {
             startActivity(addManagerIntent);
         });
 
-//        addEmployeeButton.setOnClickListener(v -> {
-//            Intent addEmployeeIntent = new Intent(adminDashboard.this, AddEmployeeActivity.class);
-//            startActivity(addEmployeeIntent);
-//        });
+        addEmployeeButton.setOnClickListener(v -> {
+            Intent addEmployeeIntent = new Intent(adminDashboard.this, AddEmployeeActivity.class);
+            startActivity(addEmployeeIntent);
+        });
+        projects.setOnClickListener(v->{
+            Intent showproj = new Intent(adminDashboard.this, ProjectsActivity.class);
+            startActivity(showproj);
+        });
 //
 //        addProjectButton.setOnClickListener(v -> {
 //            Intent addProjectIntent = new Intent(adminDashboard.this, AddProjectActivity.class);
@@ -77,12 +82,17 @@ public class adminDashboard extends AppCompatActivity {
 //        });
 
         settings.setOnClickListener(v -> {
-            Intent settingsIntent = new Intent(adminDashboard.this, SettingActivity.class);
-            startActivity(settingsIntent);
+            try {
+                Intent settingsIntent = new Intent(adminDashboard.this, SettingActivity.class);
+                startActivity(settingsIntent);
+            } catch (Exception e) {
+                Toast.makeText(adminDashboard.this, "Error starting settings: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
         });
         adminLogoImageView.setOnClickListener(v -> {
-            Intent settingsIntent = new Intent(adminDashboard.this, profile.class);
-            startActivity(settingsIntent);
+            Intent pofile = new Intent(adminDashboard.this, ManagerProfile.class);
+            startActivity(pofile);
         });
 
     }

@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class SettingActivity extends AppCompatActivity {
 
     private Switch notificationsSwitch;
-    private Switch darkModeSwitch;
     private TextView languageOption;
     private TextView accountOption;
     private ImageView backButton;
@@ -24,7 +23,6 @@ public class SettingActivity extends AppCompatActivity {
 
         // Find the views by their IDs
         notificationsSwitch = findViewById(R.id.notifications_switch);
-      //  darkModeSwitch = findViewById(R.id.dark_mode_switch);
         languageOption = findViewById(R.id.language_option);
         accountOption = findViewById(R.id.account_option);
         backButton = findViewById(R.id.back_button);
@@ -54,7 +52,7 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
 
-        // Set listeners for the switches
+        // Set listeners for the switch
         notificationsSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             // Handle notification toggle
             if (isChecked) {
@@ -65,54 +63,27 @@ public class SettingActivity extends AppCompatActivity {
                 disableNotifications();
             }
         });
-
-        darkModeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            // Handle dark mode toggle
-            if (isChecked) {
-                // Enable dark mode
-                enableDarkMode();
-            } else {
-                // Disable dark mode
-                disableDarkMode();
-            }
-        });
     }
 
     // Method to handle the language settings
     private void openLanguageSettings() {
-        // Start a new activity for language settings
         Intent intent = new Intent(SettingActivity.this, LanguageSettingsActivity.class);
         startActivity(intent);
     }
 
     // Method to handle account management
     private void openAccountManagement() {
-        // Start a new activity for account management
         Intent intent = new Intent(SettingActivity.this, AccountManagementActivity.class);
         startActivity(intent);
     }
 
     // Method to enable notifications
     private void enableNotifications() {
-        // Implement logic to enable notifications (e.g., updating preferences or settings)
+        // Implement logic to enable notifications
     }
 
     // Method to disable notifications
     private void disableNotifications() {
         // Implement logic to disable notifications
-    }
-
-    // Method to enable dark mode
-    private void enableDarkMode() {
-        // Implement logic to enable dark mode (e.g., updating theme)
-        setTheme(R.style.AppTheme_Dark);
-        recreate(); // Recreate activity to apply theme changes
-    }
-
-    // Method to disable dark mode
-    private void disableDarkMode() {
-        // Implement logic to disable dark mode (e.g., updating theme)
-        setTheme(R.style.AppTheme_Light);
-        recreate(); // Recreate activity to apply theme changes
     }
 }

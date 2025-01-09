@@ -97,28 +97,58 @@
                 android:background="@drawable/textfield_border"
                 android:layout_marginTop="8dp" />
 
+            <!-- Gender Section -->
+            <TextView
+                android:id="@+id/gender_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/gender"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <RadioGroup
+                android:id="@+id/gender_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <RadioButton
+                    android:id="@+id/radio_male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/male"
+                    android:checked="true" />
+
+                <RadioButton
+                    android:id="@+id/radio_female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/female"
+                    android:layout_marginStart="16dp" />
+            </RadioGroup>
+
+            <!-- Profile Image Section -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:background="@drawable/textfield_border"
                 android:layout_marginTop="16dp">
 
                 <ImageView
                     android:id="@+id/profile_image"
                     android:layout_width="100dp"
-                    android:layout_height="50dp"
+                    android:layout_height="100dp"
                     android:src="@drawable/puser_icon"
-                    android:contentDescription="@string/descriptionprofile_image"
-                    android:clickable="true"
-                    android:focusable="true" />
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/textfield_border" />
 
                 <TextView
                     android:id="@+id/image_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:text="@string/no_image_selected"
                     android:textSize="16sp" />
             </LinearLayout>
