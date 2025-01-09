@@ -19,33 +19,42 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     @NonNull
     @Override
     public TaskViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview, parent, false);
+        // Inflate the task_item layout
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.task_item, parent, false);
         return new TaskViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull TaskViewHolder holder, int position) {
+        // Get the task object for the current position
         Task task = taskList.get(position);
-        holder.title.setText(task.getTitle());
-        holder.description.setText(task.getDescription());
-        holder.date.setText(task.getTime());
-        holder.status.setText("Progress: " + task.getProgress() + "%");
+
+        // Bind data to the ViewHolder
+        holder.taskTitle.setText(task.getTitle());
+
+        // Format deadline display, assuming it's a String
+        holder.taskDeadline.setText("Deadline: " + task.getTime()); // You can add more date formatting if needed
+
+        // Display task progress
+        holder.taskProgress.setText("Progress: " + task.getProgress() + "%");
     }
 
     @Override
     public int getItemCount() {
+        // Return the total number of tasks in the list
         return taskList.size();
     }
 
-    static class TaskViewHolder extends RecyclerView.ViewHolder {
-        TextView title, description, date, status;
+    // ViewHolder class to hold references to the views
+    public static class TaskViewHolder extends RecyclerView.ViewHolder {
+        TextView taskTitle, taskDeadline, taskProgress;
 
-        public TaskViewHolder(@NonNull View itemView) {
+        public TaskViewHolder(View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.title);
-            description = itemView.findViewById(R.id.description);
-            date = itemView.findViewById(R.id.date);
-            status = itemView.findViewById(R.id.status);
+            // Initialize the views
+            taskTitle = itemView.findViewById(R.id.task_title);
+            taskDeadline = itemView.findViewById(R.id.task_deadline);
+            taskProgress = itemView.findViewById(R.id.task_progress);
         }
     }
 }

@@ -39,6 +39,16 @@
             android:textColor="#7478fc"
             android:textSize="30sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/add_employee2_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/add_employee"
+            android:textColor="#7478fc"
+            android:textSize="30sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <!-- Form Section -->
@@ -110,6 +120,7 @@
                     android:layout_width="100dp"
                     android:layout_height="50dp"
                     android:src="@drawable/puser_icon"
+                    android:contentDescription="@string/description_profile_image"
                     android:clickable="true"
                     android:focusable="true" />
 

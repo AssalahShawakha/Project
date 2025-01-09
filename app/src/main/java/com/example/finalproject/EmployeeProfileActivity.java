@@ -1,22 +1,13 @@
 package com.example.finalproject;
 
 import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-
-
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.sql.Connection;
@@ -31,12 +22,11 @@ public class EmployeeProfileActivity extends AppCompatActivity {
     private TextView profileImageText;
     private ImageView profileImage;
     private Button editButton;
-    private int employeeId = 1;  // Example employee ID, should be dynamically set
+    private int employeeId = 1;
 
     // Database connection details
-    private static final String DB_URL = "jdbc:mysql://your-database-url:3306/your-db-name";
-    private static final String DB_USER = "";
-    private static final String DB_PASSWORD = "";
+    private static final String DB_URL = "jdbc:mysql://192.168.1.106/project";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +52,6 @@ public class EmployeeProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Allow editing employee details
-                // Handle the update functionality here
                 updateEmployeeData(employeeId);
             }
         });
@@ -73,58 +62,62 @@ public class EmployeeProfileActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                Connection conn = null;
+                ResultSet rs = null;
                 try {
-                    Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+                    conn = DriverManager.getConnection(DB_URL);
 
                     // Query to get employee details
                     String query = "SELECT first_name, last_name, email, phone_number, salary, position " +
                             "FROM employees WHERE employee_id = ?";
                     PreparedStatement stmt = conn.prepareStatement(query);
                     stmt.setInt(1, employeeId);
-                    ResultSet rs = stmt.executeQuery();
+                    rs = stmt.executeQuery();
 
                     if (rs.next()) {
                         // Set values to the UI components
+                        ResultSet finalRs = rs;
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 try {
-                                    firstName.setText(rs.getString("first_name"));
+                                    firstName.setText(finalRs.getString("first_name"));
+                                    lastName.setText(finalRs.getString("last_name"));
+                                    email.setText(finalRs.getString("email"));
+                                    phoneNumber.setText(finalRs.getString("phone_number"));
+                                    salary.setText(String.valueOf(finalRs.getDouble("salary")));
+                                    position.setText(finalRs.getString("position"));
                                 } catch (SQLException e) {
-                                    throw new RuntimeException(e);
+                                    e.printStackTrace();
+                                    Toast.makeText(EmployeeProfileActivity.this, "Error loading data", Toast.LENGTH_SHORT).show();
                                 }
-                                try {
-                                    lastName.setText(rs.getString("last_name"));
-                                } catch (SQLException e) {
-                                    throw new RuntimeException(e);
-                                }
-                                try {
-                                    email.setText(rs.getString("email"));
-                                } catch (SQLException e) {
-                                    throw new RuntimeException(e);
-                                }
-                                try {
-                                    phoneNumber.setText(rs.getString("phone_number"));
-                                } catch (SQLException e) {
-                                    throw new RuntimeException(e);
-                                }
-                                try {
-                                    salary.setText(String.valueOf(rs.getDouble("salary")));
-                                } catch (SQLException e) {
-                                    throw new RuntimeException(e);
-                                }
-                                try {
-                                    position.setText(rs.getString("position"));
-                                } catch (SQLException e) {
-                                    throw new RuntimeException(e);
-                                }
+                            }
+                        });
+                    } else {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(EmployeeProfileActivity.this, "No data found for this employee", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
 
-                    conn.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(EmployeeProfileActivity.this, "Error fetching profile data", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } finally {
+                    // Close resources
+                    try {
+                        if (rs != null) rs.close();
+                        if (conn != null) conn.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }).start();
@@ -143,8 +136,9 @@ public class EmployeeProfileActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                Connection conn = null;
                 try {
-                    Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+                    conn = DriverManager.getConnection(DB_URL);
 
                     // SQL update query
                     String updateQuery = "UPDATE employees SET first_name = ?, last_name = ?, email = ?, " +
@@ -163,16 +157,17 @@ public class EmployeeProfileActivity extends AppCompatActivity {
                     // Execute the update
                     int rowsAffected = stmt.executeUpdate();
 
-                    if (rowsAffected > 0) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (rowsAffected > 0) {
                                 Toast.makeText(EmployeeProfileActivity.this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(EmployeeProfileActivity.this, "No changes made", Toast.LENGTH_SHORT).show();
                             }
-                        });
-                    }
+                        }
+                    });
 
-                    conn.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
                     runOnUiThread(new Runnable() {
@@ -181,6 +176,13 @@ public class EmployeeProfileActivity extends AppCompatActivity {
                             Toast.makeText(EmployeeProfileActivity.this, "Error updating profile", Toast.LENGTH_SHORT).show();
                         }
                     });
+                } finally {
+                    // Close the connection
+                    try {
+                        if (conn != null) conn.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }).start();

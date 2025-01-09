@@ -111,6 +111,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/salary" />
 
+    <!-- Save Button -->
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Save Profile"
+    android:backgroundTint="@color/purple"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/position"
+    android:textColor="@android:color/white"
+    android:padding="12dp" />
+
     <!-- Edit Button -->
     <Button
         android:id="@+id/edit_button"
@@ -122,6 +136,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/position" />
+        app:layout_constraintTop_toBottomOf="@id/save_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
